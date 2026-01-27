@@ -24,6 +24,12 @@ namespace E_commerce.Presistence.Repository
         
         =>    await context.Set<TEntity>().AddAsync(entity);
 
+        public async Task<int> CountElementAsync(ISpecifications<TEntity, TKey> specifications)
+        {
+            var ans = SpecificationsFactory.CreateQuery(context.Set<TEntity>(), specifications);
+            return await ans.CountAsync();
+
+        }
 
         public async Task<IEnumerable<TEntity>> GetAllAsync()
         { 

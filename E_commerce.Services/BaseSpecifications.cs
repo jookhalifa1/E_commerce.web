@@ -7,7 +7,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace E_commerce.Services.Specifications
+namespace E_commerce.Services
 {
     public abstract class BaseSpecifications<TEntity, Tkey> : ISpecifications<TEntity, Tkey> where TEntity : BaseEntity<Tkey>
     {
@@ -40,11 +40,29 @@ namespace E_commerce.Services.Specifications
         #region Criteria
         public Expression<Func<TEntity, bool>> Criteria { get; }
 
+      
+
         protected BaseSpecifications(  Expression<Func<TEntity,bool>> expression )
         {
             Criteria = expression;
         }
         #endregion
+
+        public int Take { get; private set; }
+
+        public int Skip { get; private set; }
+
+        public bool IsPaginated { get; private set; }
+        //50
+        //10 10 10 10 10
+        //3
+        public void Pagination(int PageSize,int PageIndex)
+        {
+            IsPaginated=true;
+            Take=PageSize;
+            Skip=(PageIndex-1) * PageSize;
+
+        }
 
 
 

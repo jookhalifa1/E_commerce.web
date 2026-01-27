@@ -1,6 +1,7 @@
 ﻿using E_Commerce.Domain.Entity;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection.Emit;
@@ -17,6 +18,12 @@ namespace E_Commerce.Domain.GenericRepository
 
         public Expression<Func<TEntity,object>> OrderBy { get; }
         public Expression<Func<TEntity, object>> OrderByDesc { get; }
+
+        public int Take { get;  }
+        public int Skip { get; }
+        
+
+        public bool IsPaginated { get; }
 
 
     }

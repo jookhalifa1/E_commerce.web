@@ -41,6 +41,11 @@ namespace E_commerce.Presistence.Repository
                 {
                     BaseQuery=BaseQuery.OrderByDescending(specifications.OrderByDesc);
                 }
+
+                if (specifications.IsPaginated)
+                {
+                    BaseQuery = BaseQuery.Skip(specifications.Skip).Take(specifications.Take);
+                }
             }
             return BaseQuery;
 

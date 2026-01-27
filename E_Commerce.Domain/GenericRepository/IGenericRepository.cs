@@ -18,6 +18,8 @@ namespace E_Commerce.Domain.GenericRepository
         void update(Tentity entity);
         void remove(Tentity entity);
 
+
+        Task<int> CountElementAsync(ISpecifications<Tentity, Tkey> specifications);
         
 
 

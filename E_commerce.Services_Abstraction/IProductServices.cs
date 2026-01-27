@@ -9,7 +9,7 @@ namespace E_commerce.Services_Abstraction
 {
      public interface IProductServices
     {
-        Task<IEnumerable<ProductDto>> GetALLProductsASync( QueryParams queryParams );
+        Task<PaginatedResult<  ProductDto >> GetALLProductsASync( QueryParams queryParams );
 
         Task<ProductDto> GetProductByIdAsync(int id);
 

@@ -2,6 +2,7 @@
 using AutoMapper.Configuration.Annotations;
 using E_commerce.Sahred;
 using E_commerce.Services.Specifications;
+using E_commerce.Services.Specifications.ProductSpecification;
 using E_commerce.Services_Abstraction;
 using E_Commerce.Domain.Entity.ProductEntity;
 using E_Commerce.Domain.GenericRepository;
@@ -23,14 +24,19 @@ namespace E_commerce.Services
             this.unitOfWork = unitOfWork;
             this.mapper = mapper;
         }
-        public async Task<IEnumerable<ProductDto>> GetALLProductsASync(  QueryParams queryParams )
+        public async Task<PaginatedResult< ProductDto>>  GetALLProductsASync(  QueryParams queryParams )
         {
             var spec =  new ProductTypeAndBrandSpecifications(queryParams);
 
             var products=await unitOfWork.GetRepo<Product,int>().GetAllAsync(spec);
 
-            return mapper.Map<IEnumerable<ProductDto>>(products);
+             var data= mapper.Map<IEnumerable<ProductDto>>(products);
+            var PageSize=data.Count();
+            var CountSpec = new CountElementProductSpecification(queryParams);
+            var  count= await unitOfWork.GetRepo<Product,int>().CountElementAsync(CountSpec);
 
+            var Result = new PaginatedResult< ProductDto >(queryParams.PageIndex , PageSize, count, data);
+            return  Result;
         }
         public async Task<IEnumerable<GetBrand>> GetAllBrandsAsync()
         {
