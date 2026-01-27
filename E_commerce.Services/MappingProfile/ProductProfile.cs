@@ -21,4 +21,5 @@ namespace E_commerce.Services.MappingProfile
             CreateMap<ProductType, GetType>();
         }
     }
+
 }
