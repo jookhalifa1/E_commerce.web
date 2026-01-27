@@ -1,4 +1,4 @@
-﻿using E_commerce.Sahre;
+﻿using E_commerce.Sahred;
 using E_commerce.Services_Abstraction;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -20,9 +20,9 @@ namespace E_Commerce.Presentation.Controllers
             this.services = services;
         }
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<ProductDto>>> GetAllProduct()
+        public async Task<ActionResult<IEnumerable<ProductDto>>> GetAllProduct([FromQuery] QueryParams Params )
         {
-            var products = await services.GetALLProductsASync();
+            var products = await services.GetALLProductsASync( Params );
             return Ok(products);
         }
         [HttpGet("{id}")]

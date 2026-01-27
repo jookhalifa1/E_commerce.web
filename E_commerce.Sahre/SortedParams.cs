@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 
 namespace E_commerce.Sahred
 {
-     public class GetType
+    public enum SortedParams
     {
-        public int Id { get; set; }
-
-        public string Name { get; set; } = default!;
+        NameAsc=1,
+        NameDesc=2,
+        PriceAsc=3, 
+        PriceDesc=4,
     }
 }

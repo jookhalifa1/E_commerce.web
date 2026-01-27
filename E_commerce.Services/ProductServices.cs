@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using AutoMapper.Configuration.Annotations;
-using E_commerce.Sahre;
+using E_commerce.Sahred;
 using E_commerce.Services.Specifications;
 using E_commerce.Services_Abstraction;
 using E_Commerce.Domain.Entity.ProductEntity;
@@ -23,9 +23,9 @@ namespace E_commerce.Services
             this.unitOfWork = unitOfWork;
             this.mapper = mapper;
         }
-        public async Task<IEnumerable<ProductDto>> GetALLProductsASync()
+        public async Task<IEnumerable<ProductDto>> GetALLProductsASync(  QueryParams queryParams )
         {
-            var spec =  new ProductTypeAndBrandSpecifications();
+            var spec =  new ProductTypeAndBrandSpecifications(queryParams);
 
             var products=await unitOfWork.GetRepo<Product,int>().GetAllAsync(spec);
 

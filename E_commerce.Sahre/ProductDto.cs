@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace E_commerce.Sahre
+namespace E_commerce.Sahred
 {
      public class ProductDto
     {

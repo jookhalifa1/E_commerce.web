@@ -32,6 +32,15 @@ namespace E_commerce.Presistence.Repository
                     //}
                     BaseQuery = specifications.IncludeExpressions.Aggregate(BaseQuery, (curentQuery, Incldueexp) => curentQuery.Include(Incldueexp));
                 }
+
+                if(specifications.OrderBy != null)
+                {
+                    BaseQuery=BaseQuery.OrderBy(specifications.OrderBy);
+                }
+                if(specifications.OrderByDesc != null)
+                {
+                    BaseQuery=BaseQuery.OrderByDescending(specifications.OrderByDesc);
+                }
             }
             return BaseQuery;
 

@@ -1,4 +1,4 @@
-﻿using E_commerce.Sahre;
+﻿using E_commerce.Sahred;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +9,7 @@ namespace E_commerce.Services_Abstraction
 {
      public interface IProductServices
     {
-        Task<IEnumerable<ProductDto>> GetALLProductsASync();
+        Task<IEnumerable<ProductDto>> GetALLProductsASync( QueryParams queryParams );
 
         Task<ProductDto> GetProductByIdAsync(int id);
 

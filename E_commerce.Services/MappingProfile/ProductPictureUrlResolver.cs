@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using E_commerce.Sahre;
+using E_commerce.Sahred;
 using E_Commerce.Domain.Entity.ProductEntity;
 using Microsoft.Extensions.Configuration;
 using System;
