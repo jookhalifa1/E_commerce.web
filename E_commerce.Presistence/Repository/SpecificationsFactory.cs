@@ -1,5 +1,5 @@
-﻿using E_Commerce.Domain.Entity;
-using E_Commerce.Domain.GenericRepository;
+﻿using E_Commerce.Domain.Contract.GenericRepository;
+using E_Commerce.Domain.Entity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Conventions;
 using Microsoft.EntityFrameworkCore.Query;

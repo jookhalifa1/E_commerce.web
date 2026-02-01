@@ -1,5 +1,5 @@
-﻿using E_Commerce.Domain.Entity;
-using E_Commerce.Domain.GenericRepository;
+﻿using E_Commerce.Domain.Contract.GenericRepository;
+using E_Commerce.Domain.Entity;
 using System;
 using System.Collections.Generic;
 using System.Linq;

@@ -1,6 +1,6 @@
 ﻿using E_commerce.Presistence.Data.DBContexts;
+using E_Commerce.Domain.Contract.GenericRepository;
 using E_Commerce.Domain.Entity;
-using E_Commerce.Domain.GenericRepository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Conventions;
 using System;

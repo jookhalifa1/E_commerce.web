@@ -1,5 +1,5 @@
 ﻿using E_commerce.Presistence.Data.DBContexts;
-using E_Commerce.Domain.DataIdentifier;
+using E_Commerce.Domain.Contract.DataIdentifier;
 using E_Commerce.Domain.Entity;
 using E_Commerce.Domain.Entity.ProductEntity;
 using Microsoft.EntityFrameworkCore;

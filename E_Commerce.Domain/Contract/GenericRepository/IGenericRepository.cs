@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace E_Commerce.Domain.GenericRepository
+namespace E_Commerce.Domain.Contract.GenericRepository
 {
      public interface IGenericRepository<Tentity,Tkey> where  Tentity : BaseEntity<Tkey>
     {

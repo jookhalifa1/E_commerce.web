@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace E_Commerce.Domain.DataIdentifier
+namespace E_commerce.Sahred.BasketDtos
 {
-     public interface Idataseeding
+    
+    public record BasketDto (string Id, ICollection<BasketItemDto> Items)
     {
-         Task insilizeAsync();
     }
 }

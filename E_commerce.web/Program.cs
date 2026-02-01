@@ -6,10 +6,12 @@ using E_commerce.Services;
 using E_commerce.Services.MappingProfile;
 using E_commerce.Services_Abstraction;
 using E_commerce.web.Extenstions;
-using E_Commerce.Domain.DataIdentifier;
-using E_Commerce.Domain.GenericRepository;
+using E_Commerce.Domain.Contract;
+using E_Commerce.Domain.Contract.DataIdentifier;
+using E_Commerce.Domain.Contract.GenericRepository;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using StackExchange.Redis;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 
@@ -36,6 +38,14 @@ namespace E_commerce.web
             builder.Services.AddAutoMapper(x => x.AddProfile<ProductProfile>());
             builder.Services.AddScoped<IProductServices, ProductServices>();
             builder.Services.AddSingleton<ProductPictureUrlResolver>();
+            builder.Services.AddSingleton<IConnectionMultiplexer>(CM =>
+                {
+                    return ConnectionMultiplexer.Connect(builder.Configuration.GetConnectionString("RedisConnection")!);
+                }
+
+            );
+            builder.Services.AddScoped<IBasketRepository, BasketRepository>();
+            builder.Services.AddScoped<IBasketServcies, BasketServices>();
 
             #endregion
 

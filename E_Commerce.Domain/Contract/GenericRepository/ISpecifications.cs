@@ -8,7 +8,7 @@ using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace E_Commerce.Domain.GenericRepository
+namespace E_Commerce.Domain.Contract.GenericRepository
 {
      public interface ISpecifications<TEntity,Tkey> where TEntity : BaseEntity<Tkey> 
     {
