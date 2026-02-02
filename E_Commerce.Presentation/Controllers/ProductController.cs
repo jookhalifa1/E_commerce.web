@@ -1,5 +1,6 @@
 ﻿using E_commerce.Sahred;
 using E_commerce.Services_Abstraction;
+using E_Commerce.Presentation.Attributes;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -20,6 +21,7 @@ namespace E_Commerce.Presentation.Controllers
             this.services = services;
         }
         [HttpGet]
+        [RedisCache]
         public async Task<ActionResult<PaginatedResult< ProductDto >>> GetAllProduct([FromQuery] QueryParams Params )
         {
             var products = await services.GetALLProductsASync( Params );

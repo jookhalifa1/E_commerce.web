@@ -31,7 +31,7 @@ namespace E_commerce.Presistence.Repository
             }
             else
             {
-               return null
+                return null;
             }
         }
 
@@ -40,7 +40,7 @@ namespace E_commerce.Presistence.Repository
         {
            var JsonData=await _database.StringGetAsync(BasketId);
 
-            var Data = JsonSerializer.Deserialize<CustomerBasket>(JsonData)
+            var Data = JsonSerializer.Deserialize<CustomerBasket>(JsonData);
                return(Data);
         }
         

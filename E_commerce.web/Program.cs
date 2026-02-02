@@ -47,6 +47,10 @@ namespace E_commerce.web
             builder.Services.AddScoped<IBasketRepository, BasketRepository>();
             builder.Services.AddScoped<IBasketServcies, BasketServices>();
 
+            builder.Services.AddScoped<IRedisRepo, RedisRepo>();
+
+            builder.Services.AddScoped<IRedisServices, RedisServices>();
+
             #endregion
 
 
