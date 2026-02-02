@@ -13,8 +13,9 @@ namespace E_commerce.Services.MappingProfile
     {
         public BasketProfile()
         {
-            CreateMap<BasketItem, BasketItemDto>().ReverseMap();
             CreateMap<BasketDto, CustomerBasket>().ReverseMap();
+            CreateMap<BasketItem, BasketItemDto>().ReverseMap();
+           
         }
 
     }

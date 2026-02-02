@@ -36,6 +36,8 @@ namespace E_commerce.web
             });
             builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
             builder.Services.AddAutoMapper(x => x.AddProfile<ProductProfile>());
+            builder.Services.AddAutoMapper(x => x.AddProfile<BasketProfile>());
+
             builder.Services.AddScoped<IProductServices, ProductServices>();
             builder.Services.AddSingleton<ProductPictureUrlResolver>();
             builder.Services.AddSingleton<IConnectionMultiplexer>(CM =>

@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace E_commerce.Sahred.BasketDtos
 {
-    public record BasketItemDto(string Id,
-     string Name,
+    public record BasketItemDto( int Id,
+     string  ProductName,
       string PictureUrl,
       [Range(1,double.MaxValue)]
    decimal Price,
