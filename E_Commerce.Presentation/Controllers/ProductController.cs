@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -24,15 +25,19 @@ namespace E_Commerce.Presentation.Controllers
         [RedisCache]
         public async Task<ActionResult<PaginatedResult< ProductDto >>> GetAllProduct([FromQuery] QueryParams Params )
         {
+           
             var products = await services.GetALLProductsASync( Params );
             return Ok(products);
         }
         [HttpGet("{id}")]
         public async Task<ActionResult<ProductDto>> GetProductById( int id)
         {
-            var product= await services.GetProductByIdAsync(id);
-            return Ok(product);
-
+            
+                var product = await services.GetProductByIdAsync(id);
+                return Ok(product);
+             
+            
+                   
         }
         [HttpGet("Types")]
 

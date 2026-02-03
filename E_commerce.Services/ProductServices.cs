@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using AutoMapper.Configuration.Annotations;
 using E_commerce.Sahred;
+using E_commerce.Services.Exceptions;
 using E_commerce.Services.Specifications;
 using E_commerce.Services.Specifications.ProductSpecification;
 using E_commerce.Services_Abstraction;
@@ -59,7 +60,14 @@ namespace E_commerce.Services
         public async Task<ProductDto> GetProductByIdAsync(int id)
         {
             var spec=new ProductTypeAndBrandSpecifications(id);
-            return mapper.Map<ProductDto>(await unitOfWork.GetRepo<Product, int>().GetById(spec)); 
+
+            var data = await unitOfWork.GetRepo<Product, int>().GetById(spec);
+
+            if(data  is null)
+            {
+                throw new ProductNotFound(id);
+            }
+            return mapper.Map<ProductDto>(data); 
         }
     }
 }

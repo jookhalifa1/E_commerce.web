@@ -5,6 +5,7 @@ using E_commerce.Presistence.Repository;
 using E_commerce.Services;
 using E_commerce.Services.MappingProfile;
 using E_commerce.Services_Abstraction;
+using E_commerce.web.CustomMiddleWear;
 using E_commerce.web.Extenstions;
 using E_Commerce.Domain.Contract;
 using E_Commerce.Domain.Contract.DataIdentifier;
@@ -61,8 +62,11 @@ namespace E_commerce.web
             await app.migrateDataSeeding();
             await app.DataSeeding();
             #endregion
-            
+
             #region Configure the HTTP request pipeline.
+
+
+            app.UseMiddleware<ExceptionHandlerMiddleWear>();
             if (app.Environment.IsDevelopment())
             {
                 app.UseSwagger();

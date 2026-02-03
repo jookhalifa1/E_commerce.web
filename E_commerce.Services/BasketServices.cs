@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using E_commerce.Sahred.BasketDtos;
+using E_commerce.Services.Exceptions;
 using E_commerce.Services_Abstraction;
 using E_Commerce.Domain.Contract;
 using E_Commerce.Domain.Entity.BasketModule;
@@ -37,6 +38,11 @@ namespace E_commerce.Services
         public async Task<BasketDto> GetBasketByIdAsync(string Id)
         {
             var basket= await repository.GetBasketByIdAsync(Id);
+            if(basket is null)
+            {
+                throw new BasketNotFound(Id);
+            }
+
           return  mapper.Map<CustomerBasket, BasketDto>(basket!);
         }
     }
