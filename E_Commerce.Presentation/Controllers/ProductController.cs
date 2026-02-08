@@ -1,6 +1,7 @@
 ﻿using E_commerce.Sahred;
 using E_commerce.Services_Abstraction;
 using E_Commerce.Presentation.Attributes;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -11,9 +12,8 @@ using System.Threading.Tasks;
 
 namespace E_Commerce.Presentation.Controllers
 {
-    [ApiController]
-    [Route("api/[controller]")]
-    public class ProductController : ControllerBase
+   
+    public class ProductController :  ApiControllerBase
     {
         private readonly IProductServices services;
 
@@ -21,6 +21,7 @@ namespace E_Commerce.Presentation.Controllers
         {
             this.services = services;
         }
+        [Authorize(Roles ="Admin")]
         [HttpGet]
         [RedisCache]
         public async Task<ActionResult<PaginatedResult< ProductDto >>> GetAllProduct([FromQuery] QueryParams Params )
@@ -34,7 +35,7 @@ namespace E_Commerce.Presentation.Controllers
         {
             
                 var product = await services.GetProductByIdAsync(id);
-                return Ok(product);
+            return HandelRequest<ProductDto>(product);  
              
             
                    

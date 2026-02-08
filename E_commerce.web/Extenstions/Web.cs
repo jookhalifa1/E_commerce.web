@@ -21,7 +21,14 @@ namespace E_commerce.web.Extenstions
         public static async Task<WebApplication> DataSeeding(this WebApplication app)
         {
             await using var scope = app.Services.CreateAsyncScope();
-            var dataseed = scope.ServiceProvider.GetRequiredService<Idataseeding>();
+            var dataseed = scope.ServiceProvider.GetRequiredKeyedService<Idataseeding>("Default");
+            await dataseed.insilizeAsync();
+            return app;
+        }
+        public static async Task<WebApplication> DataSeedingIdentity(this WebApplication app)
+        {
+            await using var scope = app.Services.CreateAsyncScope();
+            var dataseed = scope.ServiceProvider.GetRequiredKeyedService<Idataseeding>("Identity");
             await dataseed.insilizeAsync();
             return app;
         }

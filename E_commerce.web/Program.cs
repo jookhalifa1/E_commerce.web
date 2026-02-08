@@ -1,6 +1,8 @@
 
 using E_commerce.Presistence.Data.DBContexts;
+using E_commerce.Presistence.Data.IdentityDbContexts;
 using E_commerce.Presistence.Datase;
+using E_commerce.Presistence.Datase.IdintityDataseeding;
 using E_commerce.Presistence.Repository;
 using E_commerce.Services;
 using E_commerce.Services.MappingProfile;
@@ -10,10 +12,14 @@ using E_commerce.web.Extenstions;
 using E_Commerce.Domain.Contract;
 using E_Commerce.Domain.Contract.DataIdentifier;
 using E_Commerce.Domain.Contract.GenericRepository;
+using E_Commerce.Domain.Entity.IdentityModule;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using StackExchange.Redis;
 using System.Runtime.CompilerServices;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace E_commerce.web
@@ -30,7 +36,9 @@ namespace E_commerce.web
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
-            builder.Services.AddScoped<Idataseeding, Dataseed>();
+            builder.Services.AddKeyedScoped<Idataseeding, Dataseed>("Default");
+            builder.Services.AddKeyedScoped<Idataseeding,  IdentitySeed>("Identity");
+
             builder.Services.AddDbContext<StoreDbContext>(options =>
             {
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
@@ -54,6 +62,34 @@ namespace E_commerce.web
 
             builder.Services.AddScoped<IRedisServices, RedisServices>();
 
+            builder.Services.AddDbContext<SecurityContext>(option =>
+            {
+               option.UseSqlServer(  builder.Configuration.GetConnectionString("IdentityConnection"));
+            });
+
+            builder.Services.AddIdentityCore<ApplicationUser>().AddRoles<IdentityRole>().AddEntityFrameworkStores<SecurityContext>();
+            builder.Services.AddScoped<IAuthenticationServ, AuthenticationServ>();
+            builder.Services.AddAuthentication(option =>
+            {
+                option.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                option.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(opt =>
+            {
+                opt.SaveToken = true;
+
+                opt.TokenValidationParameters = new TokenValidationParameters()
+                {
+
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidateLifetime = true,
+                    ValidIssuer = builder.Configuration["JWTOptions:Issuer"],
+                    ValidAudience = builder.Configuration["JWTOptions:Audience"],
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JWTOptions:SecretKey"]))
+                };
+
+            });
+
             #endregion
 
 
@@ -61,6 +97,7 @@ namespace E_commerce.web
             #region Dataseed
             await app.migrateDataSeeding();
             await app.DataSeeding();
+            await app.DataSeedingIdentity();
             #endregion
 
             #region Configure the HTTP request pipeline.

@@ -52,7 +52,7 @@ namespace E_commerce.web.CustomMiddleWear
 
         private static async Task NotFoundEndPointAsync(HttpContext context)
         {
-            if (context.Response.StatusCode == StatusCodes.Status404NotFound)
+            if (context.Response.StatusCode == StatusCodes.Status404NotFound && !context.Response.HasStarted)
             {
                 var problem = new ProblemDetails()
                 {

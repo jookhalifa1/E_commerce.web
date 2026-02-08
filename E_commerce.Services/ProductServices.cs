@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using AutoMapper.Configuration.Annotations;
 using E_commerce.Sahred;
+using E_commerce.Sahred.CommonResult;
 using E_commerce.Services.Exceptions;
 using E_commerce.Services.Specifications;
 using E_commerce.Services.Specifications.ProductSpecification;
@@ -57,7 +58,7 @@ namespace E_commerce.Services
              
         }
 
-        public async Task<ProductDto> GetProductByIdAsync(int id)
+        public async Task<Result< ProductDto>> GetProductByIdAsync(int id)
         {
             var spec=new ProductTypeAndBrandSpecifications(id);
 
@@ -65,9 +66,9 @@ namespace E_commerce.Services
 
             if(data  is null)
             {
-                throw new ProductNotFound(id);
+                  return Error.NotFound("Product.NotFound",$"Product has Id {id} is not Found") ;
             }
-            return mapper.Map<ProductDto>(data); 
+            return  mapper.Map<ProductDto>(data); 
         }
     }
 }
