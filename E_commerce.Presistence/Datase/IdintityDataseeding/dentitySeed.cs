@@ -11,15 +11,15 @@ using System.Threading.Tasks;
 
 namespace E_commerce.Presistence.Datase.IdintityDataseeding
 {
-    public class IdentitySeed : Idataseeding
+    public class dentitySeed : Idataseeding
     {
         private readonly UserManager<ApplicationUser> userManager;
         private readonly RoleManager<IdentityRole> roleManager;
         private readonly ILogger logger;
 
-        public IdentitySeed(UserManager<ApplicationUser> userManager,
+        public dentitySeed(UserManager<ApplicationUser> userManager,
                             RoleManager<IdentityRole> roleManager,
-                            ILogger<IdentitySeed> logger)
+                            ILogger<dentitySeed> logger)
         {
             this.userManager = userManager;
             this.roleManager = roleManager;

@@ -1,6 +1,7 @@
 ﻿using E_commerce.Presistence.Data.DBContexts;
 using E_Commerce.Domain.Contract.DataIdentifier;
 using E_Commerce.Domain.Entity;
+using E_Commerce.Domain.Entity.OrderModule;
 using E_Commerce.Domain.Entity.ProductEntity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
@@ -30,7 +31,8 @@ namespace E_commerce.Presistence.Datase
                  var HasBrands = await context.productBrands.AnyAsync();
                 var HasProductType = await context.productTypes.AnyAsync();
                 var HasProduct= await context.products.AnyAsync();
-                if (HasBrands && HasProductType  &&  HasProduct) return;
+                var HasDeliverMethod = await context.Set<DeliveryMethod>().AnyAsync();
+                if (HasBrands && HasProductType  &&  HasProduct && HasDeliverMethod) return;
 
                 if(! HasBrands)
                 {
@@ -48,6 +50,12 @@ namespace E_commerce.Presistence.Datase
                 {
                    await seeddatafromJason<Product, int>("products.json", context.products);
 
+                }
+
+
+                if (!HasDeliverMethod)
+                {
+                    await seeddatafromJason<DeliveryMethod, int>("delivery.json", context.Set<DeliveryMethod>());
                 }
                 await context.SaveChangesAsync();
 

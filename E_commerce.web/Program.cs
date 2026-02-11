@@ -37,7 +37,7 @@ namespace E_commerce.web
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
             builder.Services.AddKeyedScoped<Idataseeding, Dataseed>("Default");
-            builder.Services.AddKeyedScoped<Idataseeding,  IdentitySeed>("Identity");
+            builder.Services.AddKeyedScoped<Idataseeding,  dentitySeed>("Identity");
 
             builder.Services.AddDbContext<StoreDbContext>(options =>
             {
@@ -46,6 +46,8 @@ namespace E_commerce.web
             builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
             builder.Services.AddAutoMapper(x => x.AddProfile<ProductProfile>());
             builder.Services.AddAutoMapper(x => x.AddProfile<BasketProfile>());
+            builder.Services.AddAutoMapper(x => x.AddProfile<OrderProfile>());
+
 
             builder.Services.AddScoped<IProductServices, ProductServices>();
             builder.Services.AddSingleton<ProductPictureUrlResolver>();
@@ -89,6 +91,7 @@ namespace E_commerce.web
                 };
 
             });
+            builder.Services.AddScoped<IOrderServices, OrderServices>();
 
             #endregion
 
