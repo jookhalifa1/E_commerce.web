@@ -20,3 +20,4 @@ A full-featured E-Commerce Web API built with ASP.NET Core following Clean Archi
 - **Caching:** Redis
 - **Architecture & Patterns:** Clean Architecture, Repository Pattern, Specification Pattern, SOLID principles
 - **Tools:** Swagger/OpenAPI, AutoMapper, Git/GitHub
+<img width="1532" height="768" alt="Screenshot 2026-02-17 201805" src="https://github.com/user-attachments/assets/73127548-b978-487c-9ae0-f51c378ab142" />
